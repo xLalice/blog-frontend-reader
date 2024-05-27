@@ -27,10 +27,10 @@ export default function Home(){
                 <p className="mt-4 text-lg font-salium">An Odin Project Assignment</p>
               </div>
           </section>
-          <section className="container mx-auto py-8 flex justify-center">
+          <section className="container mx-auto py-8 flex flex-wrap justify-center">
             {posts.length ? (
                 posts.map(post => (
-                  <div key={post._id} className="bg-gray-900 rounded-md p-6 text-center max-w-xs">
+                  <div key={post._id} className="w-72 h-96 bg-gray-900 rounded-md p-6 m-2 text-white flex flex-col justify-between">
                     <Card 
                       author={post.author}
                       date={post.date}

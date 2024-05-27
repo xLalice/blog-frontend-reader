@@ -1,18 +1,26 @@
-import React from "react";
+import { useState, useEffect } from 'react';
+import { useEditor, EditorContent } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
 import { Link } from "react-router-dom";
 
-export default function Card({id, title, content, author, date}) {
+export default function Card({ author, date, content, title, id }) {
+    const editor = useEditor({
+        extensions: [StarterKit],
+        content: content,
+        editable: false,
+    });
+
     return (
-        <>
-            <h1 className="text-2xl font-bold mb-2">{title}</h1>
-            <p className="mb-6">By {author} on {date}</p> 
-            <p>{content}</p>
-            <button className="mt-4 text-gray-800 bg-white hover:bg-blue-500 text-white font-semibold py-2 px-4 rounded">
-                <Link to={`/post/${id}`} >
-                    View Post
-                </Link>
-            </button>
-        </>
-            
+        <div className="flex flex-col h-full">
+            <h3 className="text-xl font-bold mb-2 w-full ">{title}</h3>
+            <div className="flex-grow overflow-hidden">
+                <EditorContent editor={editor} />
+            </div>
+            <div className="mt-4">
+                <div className="text-sm">{author}</div>
+                <div className="text-sm">{date}</div>
+            </div>
+            <Link to={`/post/${id}`} className="mt-4 text-blue-500 hover:underline self-end">Read More</Link>
+        </div>
     );
 }
